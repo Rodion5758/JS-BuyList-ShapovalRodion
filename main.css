@@ -474,6 +474,8 @@ span {
         background-color: rgb(255, 255, 255) !important;
         color: rgb(0,0,0) !important;
     }
+
+
     .app-badge-container {
         position: fixed !important;
         bottom: 10px !important;
@@ -487,7 +489,7 @@ span {
         width: auto !important;
         background-color: rgb(255, 255, 255) !important;
         color: rgb(0, 0, 0) !important;
-        border: 2px solid rgb(51, 51, 51) !important;
+        border: 2px solid rgb(210, 17, 200) !important;
         border-radius: 8px !important;
         padding: 15px 20px !important;
         height: auto !important;
@@ -521,7 +523,7 @@ span {
         opacity: 1 !important;
     }
 
-    .add-item-button, .quantity-adjust-btn, .remove-item-btn, .new-item-name-input, .item-name-edit-input {
+    .add-item-button, .quantity-adjust-btn, .remove-item-btn, .new-item-name-input {
         display: none !important;
     }
     .item-status-label {
