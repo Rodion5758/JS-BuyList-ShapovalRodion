@@ -1,16 +1,85 @@
 <!DOCTYPE html>
-<html>
-<head lang="uk">
+<head>
     <meta charset="UTF-8">
-    <title>My Page</title>
-
-
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy List</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
-	<span class="product-item">
-		Apple
-		<span class="amount">4</span>
-	</span>
+<main class="shopping-app-container">
+    <section class="main-shopping-list-section">
+        <div class="add-item-form">
+            <input type="text" placeholder="Назва товару" class="new-item-name-input"/>
+            <button class="add-item-button" data-tooltip="Додати товар">Додати </button>
+        </div>
+        <div class="shopping-list-item">
+            <span class="item-name-display"><del>Помідори</del></span>
+            <div class="item-quantity-controls">
+                <span class="current-quantity-display">2</span>
+            </div>
+            <div class="item-status-and-actions">
+                <span class="item-status-label">Не куплено</span>
+            </div>
+        </div>
+        <div class="shopping-list-item">
+            <span class="item-name-display">Печиво</span>
+            <div class="item-quantity-controls">
+                <button class="quantity-adjust-btn decrease-btn" data-tooltip="Відняти одиницю товару">-</button>
+                <span class="current-quantity-display">2</span>
+                <button class="quantity-adjust-btn increase-btn" data-tooltip="Додати одиницю товару">+</button>
+            </div>
+            <div class="item-status-and-actions">
+                <span class="item-status-label">Куплено</span>
+                <button class="remove-item-btn" data-tooltip="Видалити товар зі спикску">x</button>
+            </div>
+        </div class>
+        <div class="shopping-list-item">
+            <input class="item-name-edit-input" value="Сир" />
+            <div class="item-quantity-controls">
+                <button class="quantity-adjust-btn decrease-btn" data-tooltip="Відняти одиницю товару">-</button>
+                <span class="current-quantity-display">1</span>
+                <button class="quantity-adjust-btn increase-btn" data-tooltip="Додати одиницю товару">+</button>
+            </div>
+            <div class="item-status-and-actions">
+                <span class="item-status-label">Куплено</span>
+                <button class="remove-item-btn" data-tooltip="Видалити товар зі спикску">x</button>
+            </div>
+        </div>
+    </section>
+    <section class="shopping-summary-section">
+        <div class="summary-group-header">
+            <span class="summary-group-title">Залишилося</span>
+        </div>
+        <div class="summary-items-list summary-items-layout">
+            <span class="summary-item">
+                <span class="summary-item-name">Печиво</span>
+                <span class="summary-item-quantity">2</span>
+            </span>
+            <span class="summary-item">
+                <span class="summary-item-name">Сир</span>
+                <span class="summary-item-quantity">1</span>
+            </span>
+        </div>
+        <div class="summary-group-header">
+            <span class="summary-group-title">Куплено</span>
+        </div>
+        <div class="summary-items-list summary-items-layout">
+            <div class="summary-item">
+                <span class="summary-item-name is-purchased-strikethrough"><del>Помідори</del></span>
+                <span class="summary-item-quantity is-purchased-strikethrough"><del>2</del></span>
+            </div>
+        </div>
+    </section>
+
+    <div class="app-badge-container">
+        <div class="app-badge">
+            <div class="app-badge-title-text">Buy List</div>
+            <div class="app-badge-author-text">Created by:<br><b>Shapoval Rodion</b></div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

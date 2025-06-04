@@ -1,17 +1,531 @@
-.product-item {
-	background-color: gray;
-	display: inline-block;
-	height: 25px;
-	padding: 5px;
-	border-radius: 5px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
 }
 
-.amount {
-	background-color: yellow;
-	border-radius: 10px;
-	
-	display: inline-block;
-	height: 20px;
-	width: 20px;
-	text-align: center;
+body {
+    color: rgb(0, 0, 0);
+    background-color: rgb(240, 242, 245);
+}
+
+span {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.shopping-app-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-shopping-list-section {
+    width: 80%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 10px 0px;
+    margin-right: 10px;
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.add-item-form,
+.shopping-list-item,
+.summary-group-header,
+.summary-items-list {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.add-item-form {
+    justify-content: space-between;
+}
+
+.main-shopping-list-section > :first-child,
+.shopping-summary-section > :first-child {
+    padding: 10px 10px 10px 10px;
+}
+
+.main-shopping-list-section > :last-child,
+.shopping-summary-section > :last-child {
+    border-bottom: none;
+    padding: 10px 10px 10px 10px;
+}
+
+.shopping-summary-section {
+    width: 20%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid rgb(220, 220, 220);
+}
+
+.new-item-name-input {
+    flex-grow: 1;
+    height: 40px;
+    border-radius: 5px 0px 0px 5px;
+    padding: 0 10px;
+    border: 2px solid rgb(200, 200, 200);
+    color: rgb(100, 100, 100);
+    font-size: 16px;
+    border-right: none;
+    min-width: 150px;
+}
+
+.new-item-name-input:focus {
+    outline: none;
+    border-color: rgb(66, 131, 202);
+}
+
+.add-item-button,
+.quantity-adjust-btn,
+.remove-item-btn {
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    transition: background-color 0.2s ease-in-out;
+    flex-shrink: 0;
+}
+
+.add-item-button {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 5px 5px 0px;
+    background-color: rgb(66, 131, 202);
+    font-size: 18px;
+    padding: 0 15px;
+    border-bottom: 3px solid rgb(50, 100, 160);
+    min-width: 80px;
+}
+
+.add-item-button:hover {
+    background-color: rgb(50, 100, 160);
+}
+
+.add-item-button::after,
+.quantity-adjust-btn::after,
+.remove-item-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    background-color: rgb(175, 0, 218);
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px) scale(0.5);
+}
+
+.add-item-button:hover::after,
+.quantity-adjust-btn:hover::after,
+.remove-item-btn:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px) scale(1);
+}
+
+.item-quantity-controls {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.current-quantity-display {
+    color: rgb(50, 50, 50);
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgb(238, 238, 238);
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.item-status-and-actions {
+    width: 250px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.item-status-label {
+    color: rgb(80, 80, 80);
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgb(238, 238, 238);
+    padding: 10px 20px;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+.quantity-adjust-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 50%;
+}
+
+.increase-btn {
+    background-color: rgb(89, 183, 85);
+    border-bottom: 3px solid rgb(70, 150, 65);
+}
+
+.increase-btn:hover {
+    background-color: rgb(70, 150, 65);
+}
+
+.decrease-btn {
+    background-color: rgb(201, 59, 51);
+    border-bottom: 3px solid rgb(170, 45, 38);
+}
+
+.decrease-btn:hover {
+    background-color: rgb(170, 45, 38);
+}
+
+.remove-item-btn {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(201, 59, 51);
+    font-size: 20px;
+    border-radius: 8px;
+    border-bottom: 3px solid rgb(170, 45, 38);
+}
+
+.remove-item-btn:hover {
+    background-color: rgb(170, 45, 38);
+}
+
+.item-name-display,
+.item-name-edit-input {
+    flex-grow: 1;
+    flex-shrink: 1;
+    color: rgb(0, 0, 0);
+    margin-right: auto; 
+    min-width: 100px;
+}
+.item-name-display del {
+    color: rgb(100, 100, 100);
+}
+
+
+.summary-group-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    padding: 5px;
+}
+
+.summary-item-name {
+    color: rgb(80, 80, 80);
+    font-size: 16px;
+    margin-right: 5px;
+    word-break: break-word;
+}
+.summary-item-name.is-purchased-strikethrough del {
+    color: rgb(120, 120, 120);
+}
+
+.summary-items-layout {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.item-name-edit-input {
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 10px;
+    border: 1px solid rgb(180, 200, 220);
+    color: rgb(50, 50, 50);
+    font-size: 16px;
+}
+ 
+.item-name-edit-input:focus {
+    outline: none;
+    border:2px solid rgb(66, 131, 202);
+}
+
+.summary-item {
+    background-color: rgb(230, 230, 230);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.summary-item-quantity {
+    background-color: rgb(226, 120, 55);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+.summary-item-quantity.is-purchased-strikethrough del {
+    color: rgb(255, 255, 255);
+    opacity: 0.7;
+}
+
+
+@media (max-width: 1100px){
+    .shopping-app-container {
+        padding: 15px;
+    }
+    .main-shopping-list-section {
+        width: 70%;
+        margin-right: 15px;
+    }
+    .shopping-summary-section {
+        width: 30%;
+    }
+    .summary-items-layout {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+
+@media (max-width: 800px) {
+    .shopping-app-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        padding: 10px;
+    }
+    .main-shopping-list-section, .shopping-summary-section {
+        width: 100%;
+        margin-right: 0;
+    }
+    .add-item-form {
+        flex-wrap: nowrap;
+    }
+    .new-item-name-input{
+        font-size: 15px;
+    }
+    .add-item-button{
+        font-size: 16px;
+        padding: 0 10px;
+        min-width: 70px;
+    }
+
+    .shopping-list-item {
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+    .item-name-display, .item-name-edit-input {
+        min-width: min(40%, 120px);
+        font-size: 15px;
+    }
+    .item-quantity-controls {
+        margin-left: 10px;
+    }
+    
+    .item-status-and-actions {
+        width: 30%;
+        margin-left: 5px;
+    }
+
+    .summary-items-layout {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 5px;
+    }
+    .summary-group-title {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 550px) {
+    .new-item-name-input {
+        height: 38px;
+        font-size: 14px;
+        min-width: 100px;
+    }
+    .add-item-button {
+        height: 38px;
+        font-size: clamp(12px, 3vw, 14px);
+        padding: 0 8px;
+        min-width: 60px;
+    }
+    .add-item-form {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .new-item-name-input, .add-item-button {
+        width: 100%;
+        border-radius: 5px;
+    }
+    .new-item-name-input {
+        border-right: 2px solid rgb(200, 200, 200);
+    }
+
+
+    .item-name-display, .item-name-edit-input {
+        font-size: clamp(13px, 3.5vw, 14px);
+        min-width: 80px;
+        margin-right: auto;
+    }
+    .shopping-list-item {
+        gap: 5px;
+    }
+    .item-quantity-controls {
+        margin-left: 5px;
+        gap: 3px;
+    }
+    .current-quantity-display {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+    .quantity-adjust-btn, .remove-item-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    .item-status-and-actions {
+        gap: 3px;
+    }
+    .item-status-label {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+    .summary-item-name {
+        font-size: 12px;
+    }
+    .summary-item-quantity {
+        width: 22px;
+        height: 22px;
+        font-size: 12px;
+    }
+    .app-badge-container {
+        left: 10px;
+    }
+}
+
+
+.app-badge-container {
+  position: fixed;
+  bottom: 0;
+  left: 60px;
+  z-index: 1000;
+}
+
+.app-badge {
+  background-color: rgb(140, 5, 218);
+  color: rgb(255, 255, 255);
+  padding: 12px 24px;
+  font-weight: bold;
+  border-radius: 12px 12px 0 0;
+  cursor: pointer;
+  transition: height 0.3s, background-color 0.3s;
+  height: 50px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.app-badge:hover {
+  height: 100px;
+  background-color: rgb(178, 4, 163);
+}
+
+.app-badge-author-text {
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.app-badge:hover .app-badge-author-text {
+  opacity: 1;
+}
+
+@media print {
+    body {
+        background-color: rgb(255, 255, 255) !important;
+        color: rgb(0,0,0) !important;
+    }
+    .app-badge-container {
+        position: fixed !important;
+        bottom: 10px !important;
+        left: 10px !important;
+        width: auto !important;
+        z-index: auto !important;
+        margin: 0 !important;
+    }
+
+    .app-badge {
+        width: auto !important;
+        background-color: rgb(255, 255, 255) !important;
+        color: rgb(0, 0, 0) !important;
+        border: 2px solid rgb(51, 51, 51) !important;
+        border-radius: 8px !important;
+        padding: 15px 20px !important;
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        text-align: left !important;
+        box-shadow: none !important;
+        cursor: default !important;
+        transition: none !important;
+    }
+
+    .app-badge-title-text {
+        display: none !important;
+    }
+
+    .app-badge-author-text {
+        opacity: 1 !important;
+        font-size: 12pt !important;
+        font-weight: normal !important;
+        color: rgb(0, 0, 0) !important;
+        margin: 0 !important;
+        line-height: 1.4 !important;
+    }
+
+    .app-badge:hover {
+        height: auto !important;
+        background-color: rgb(255, 255, 255) !important;
+    }
+
+    .app-badge:hover .app-badge-author-text {
+        opacity: 1 !important;
+    }
+
+    .add-item-button, .quantity-adjust-btn, .remove-item-btn, .new-item-name-input, .item-name-edit-input {
+        display: none !important;
+    }
+    .item-status-label {
+        border: 1px solid rgb(150,150,150) !important;
+        background-color: rgb(245,245,245) !important;
+    }
 }
