@@ -12,7 +12,7 @@ body {
 
 span {
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .shopping-app-container {
@@ -48,6 +48,32 @@ span {
 
 .add-item-form {
     justify-content: space-between;
+}
+
+.shopping-list-item.bought {
+    .increase-btn,
+    .decrease-btn {
+        visibility: hidden;
+    }
+
+    .item-name-display {
+        text-decoration: line-through;
+        color: rgb(100, 100, 100);
+    }
+}
+
+.summary-item.bought {
+
+    .summary-item-name, .summary-item-quantity{
+        text-decoration: line-through;
+    }
+}
+.shopping-list-item.nomore .decrease-btn {
+    
+}
+
+.shopping-list-item.bought .remove-item-btn {
+    display: none;
 }
 
 .main-shopping-list-section > :first-child,
@@ -91,7 +117,8 @@ span {
 
 .add-item-button,
 .quantity-adjust-btn,
-.remove-item-btn {
+.remove-item-btn ,
+.item-status-label {
     color: rgb(255, 255, 255);
     border: none;
     cursor: pointer;
@@ -120,7 +147,8 @@ span {
 
 .add-item-button::after,
 .quantity-adjust-btn::after,
-.remove-item-btn::after {
+.remove-item-btn::after,
+.item-status-label::after {
     content: attr(data-tooltip);
     position: absolute;
     background-color: rgb(175, 0, 218);
@@ -139,7 +167,8 @@ span {
 
 .add-item-button:hover::after,
 .quantity-adjust-btn:hover::after,
-.remove-item-btn:hover::after {
+.remove-item-btn:hover::after,
+.item-status-label:hover::after {
     opacity: 1;
     transform: translateX(-50%) translateY(0px) scale(1);
 }
@@ -173,6 +202,7 @@ span {
 
 .item-status-label {
     color: rgb(80, 80, 80);
+    cursor: pointer;
     font-size: 16px;
     font-weight: bold;
     background-color: rgb(238, 238, 238);
@@ -180,6 +210,11 @@ span {
     border: 1px solid rgb(210, 210, 210);
     border-radius: 5px;
     white-space: nowrap;
+}
+
+.item-status-label:hover {
+    background-color: rgb(220, 217, 217);
+
 }
 
 .quantity-adjust-btn {
@@ -223,15 +258,11 @@ span {
 .item-name-display,
 .item-name-edit-input {
     flex-grow: 1;
-    flex-shrink: 1;
     color: rgb(0, 0, 0);
     margin-right: auto; 
     min-width: 100px;
+    width: 100%;
 }
-.item-name-display del {
-    color: rgb(100, 100, 100);
-}
-
 
 .summary-group-title {
     font-size: 20px;
@@ -245,9 +276,6 @@ span {
     font-size: 16px;
     margin-right: 5px;
     word-break: break-word;
-}
-.summary-item-name.is-purchased-strikethrough del {
-    color: rgb(120, 120, 120);
 }
 
 .summary-items-layout {
@@ -293,11 +321,6 @@ span {
     text-align: center;
     flex-shrink: 0;
 }
-.summary-item-quantity.is-purchased-strikethrough del {
-    color: rgb(255, 255, 255);
-    opacity: 0.7;
-}
-
 
 @media (max-width: 1100px){
     .shopping-app-container {
@@ -474,7 +497,6 @@ span {
         background-color: rgb(255, 255, 255) !important;
         color: rgb(0,0,0) !important;
     }
-
 
     .app-badge-container {
         position: fixed !important;
