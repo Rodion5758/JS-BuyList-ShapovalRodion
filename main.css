@@ -68,9 +68,6 @@ span {
         text-decoration: line-through;
     }
 }
-.shopping-list-item.nomore .decrease-btn {
-    
-}
 
 .shopping-list-item.bought .remove-item-btn {
     display: none;
@@ -171,6 +168,14 @@ span {
 .item-status-label:hover::after {
     opacity: 1;
     transform: translateX(-50%) translateY(0px) scale(1);
+}
+
+.decrease-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: rgb(239, 99, 99);
+    border-bottom: none;
+    pointer-events: none;
 }
 
 .item-quantity-controls {
